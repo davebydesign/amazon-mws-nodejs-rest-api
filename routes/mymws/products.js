@@ -191,7 +191,7 @@ router.post('/GetMyPriceForASIN', upload.array(), function (req, res, next) {
 		res.status(500).send(err);
 	});
 
-})
+});
 
 
 
@@ -207,7 +207,7 @@ router.post('/GetProductCategoriesForSKU', upload.array(), function (req, res, n
 		res.status(500).send(err);
 	});
 
-})
+});
 
 
 
@@ -223,7 +223,7 @@ router.post('/GetProductCategoriesForASIN', upload.array(), function (req, res, 
 		res.status(500).send(err);
 	});
 
-})
+});
 
 
 

@@ -7,8 +7,8 @@ var
 class ProductsRequestCall extends AmazonMwsRequest {
 	constructor(creds) {
 		super(creds);
-		this.query["Version"] = "2011-10-01";
-		this.query["SellerId"] = creds.MerchantId;
+		this.query.Version = "2011-10-01";
+		this.query.SellerId = creds.MerchantId;
 		this.path = "/Products/2011-10-01";
 	}
 }
