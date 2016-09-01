@@ -8,50 +8,54 @@ var
 
 
 
-var
-	RoutePath = '/mymws/products/ListMatchingProducts',
-	GoodInputData = {
-		MarketplaceId : "ATVPDKIKX0DER",
-		Query : "stephen king"
-	},
-
-	BadInputData = {
-		MarketplaceId : "ATVPDKIKX0DER",
-		Querky : "stephen king"
-	},
-
-	GoodResponse = {},
-	BadResponse = {};
 
 
 
-describe('POST '+RoutePath, function() {
+
+
+
+
+
+
+describe('POST /mymws/products/ListMatchingProducts', function() {
+
+
+	var
+		GoodResponse = {},
+		BadResponse = {},
+		GoodInputData = {
+			MarketplaceId : "ATVPDKIKX0DER",
+			Query : "stephen king"
+		},
+
+		BadInputData = {
+			MarketplaceId : "ATVPDKIKX0DER",
+			Querky : "stephen king"
+		};
+
+
+
+
 
 	before(function(done) {
-		api.post(RoutePath)
+		api.post('/mymws/products/ListMatchingProducts')
 		.send(GoodInputData)
 		.end(function(err, res){
 			if (err) return done(err);
 			GoodResponse = res;
-			this.timeout(2000);
 			done();
 		});
 	});	
 
-	
-
 	before(function(done) {
-		api.post(RoutePath)
+		api.post('/mymws/products/ListMatchingProducts')
 		.send(BadInputData)
 		.end(function(err, res){
 			if (err) return done(err);
 			BadResponse = res;
-			this.timeout(2000);
 			done();
 		});
 	});	
-
-	
 
 	it('A good request should return a response status of 200.', function(done) {
 		GoodResponse.status.should.equal(200);
@@ -119,34 +123,34 @@ describe('POST '+RoutePath, function() {
 
 
 
-var
-RoutePath = '/mymws/products/GetMatchingProduct',
-GoodInputData = {
-	MarketplaceId : "ATVPDKIKX0DER",
-	ASINList: [
-		'006443009X',
-		'044845694X'
-	]
-},
-BadInputData = {
-	ASINList: [
-		'006443009X',
-		'044845694X'
-	]
-};
 
 
 
-describe('POST '+RoutePath, function()  {
-
+describe('POST /mymws/products/GetMatchingProduct', function()  {
+	var
+		GoodInputData = {
+			MarketplaceId : "ATVPDKIKX0DER",
+			ASINList: [
+				'006443009X',
+				'044845694X'
+			]
+		},
+		BadInputData = {
+			ASINList: [
+				'006443009X',
+				'044845694X'
+			]
+		};	
+	var
+		GoodResponse = {},
+		BadResponse = {};
 
 	before(function(done) {
-		api.post(RoutePath)
+		api.post('/mymws/products/GetMatchingProduct')
 		.send(GoodInputData)
 		.end(function(err, res){
 			if (err) return done(err);
 			GoodResponse = res;
-			this.timeout(2000);
 			done();
 		});
 	});	
@@ -154,7 +158,7 @@ describe('POST '+RoutePath, function()  {
 	
 
 	before(function(done) {
-		api.post(RoutePath)
+		api.post('/mymws/products/GetMatchingProduct')
 		.send(BadInputData)
 		.end(function(err, res){
 			if (err) return done(err);
