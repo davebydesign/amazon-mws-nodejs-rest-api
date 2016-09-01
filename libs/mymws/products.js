@@ -732,4 +732,4 @@ module.exports = class ProductsRequest  {
 			Call.deferred.fulfill(result);			
 		});
 	}
-}
+};
