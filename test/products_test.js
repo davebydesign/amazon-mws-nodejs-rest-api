@@ -14,7 +14,7 @@ var
 describe('/mymws/products/', function() {
 
 
-	describe('ListMatchingProducts - Good Request', function() {
+	describe.skip('ListMatchingProducts - Good Request', function() {
 
 		var res = {};
 
@@ -77,14 +77,14 @@ describe('/mymws/products/', function() {
 
 
 
-	describe('ListMatchingProducts - Bad Request', function() {
+	describe.skip('ListMatchingProducts - Bad Request', function() {
 		var res = {};
 
 		before(function(done) {
 			api.post('/mymws/products/ListMatchingProducts')
 			.send( {
 				MarketplaceId : "ATVPDKIKX0DER",
-				Querky : "stephen king"
+				Querky : "stephen king"				//Intentional typo in 'Query' field
 			})
 			.end(function(err, response){
 				if (err) return done(err);
@@ -118,7 +118,12 @@ describe('/mymws/products/', function() {
 
 
 
-	describe('GetMatchingProduct - Good Request', function()  {
+
+
+
+
+
+	describe.skip('GetMatchingProduct - Good Request', function()  {
 
 		var res = {};
 
@@ -139,7 +144,6 @@ describe('/mymws/products/', function() {
 		});	
 
 
-
 		it('should return a response status of 200.\r\n', function(done) {
 			res.status.should.equal(200);
 			done();
@@ -149,59 +153,230 @@ describe('/mymws/products/', function() {
 	});
 
 
+	describe.skip('GetMatchingProduct - Bad Request', function()  {
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetMatchingProduct')
+			.send({
+				//MarketplaceId : "ATVPDKIKX0DER",  // missing MarketplaceId
+				ASINList: [
+					'006443009X',
+					'044845694X'
+				]
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});	
+
+
+
+		it('should return a response status of 500.\r\n', function(done) {
+			res.status.should.equal(500);
+			done();
+		});
+	});
 
 
 
 
-	describe('GetMatchingProductForId', function()  {
-		var
-			GoodInputData = {
+
+
+	describe.skip('GetMatchingProductForId - Good Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetMatchingProductForId')
+			.send({
 				MarketplaceId : "ATVPDKIKX0DER",
 				IdType: 'ASIN',
 				IdList: [
 					'006443009X',
 					'044845694X'
 				]
-			},
-			BadInputData = {
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});			
+
+
+		it('should return a response status of 200.', function(done) {
+			res.status.should.equal(200);
+			done();
+		});
+
+	});
+
+
+
+	describe.skip('GetMatchingProductForId - Bad Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetMatchingProductForId')
+			.send({
+				//MarketplaceId : "ATVPDKIKX0DER",
+				IdType: 'ASIN',
 				IdList: [
 					'006443009X',
 					'044845694X'
 				]
-			};	
-		var
-			GoodResponse = {},
-			BadResponse = {};
-
-		before(function(done) {
-			api.post('/mymws/products/GetMatchingProductForId')
-			.send(GoodInputData)
-			.end(function(err, res){
+			})
+			.end(function(err, response){
 				if (err) return done(err);
-				GoodResponse = res;
+				res = response;
 				done();
 			});
-		});	
+		});			
 
-		
 
-		before(function(done) {
-			api.post('/mymws/products/GetMatchingProductForId')
-			.send(BadInputData)
-			.end(function(err, res){
-				if (err) return done(err);
-				BadResponse = res;
-				done();
-			});
-		});	
-
-		it('A good request should return a response status of 200.', function(done) {
-			GoodResponse.status.should.equal(200);
+		it('should return a response status of 500.', function(done) {
+			res.status.should.equal(500);
 			done();
 		});
 
+	});
+
+
+
+	describe.skip('GetCompetitivePricingForSKU - Good Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetCompetitivePricingForSKU')
+			.send({
+				MarketplaceId : "ATVPDKIKX0DER",
+				SellerSKUList: [
+					// INSERT SELLER SKUS HERE
+					'',
+					''
+				]
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});			
+
+
+		it('should return a response status of 200.', function(done) {
+			res.status.should.equal(200);
+			done();
+		});
 
 	});
+
+
+
+	describe.skip('GetCompetitivePricingForSKU - Bad Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetCompetitivePricingForSKU')
+			.send({
+				MarketplaceId : "ATVPDKIKX0DER",
+				SellerSKUList: [
+					// INTENTIONAL BAD DATA
+					'blah',
+					'blah blah'
+				]
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});			
+
+
+		it('should return expected error result.', function(done) {
+			res.status.should.equal(200);
+			res.body.should.be.a('object');
+			res.body.should.have.property('Products');
+			res.body.should.have.property('Errors');
+			res.body.Errors.should.be.a('array');
+			res.body.Errors.length.should.equal(2);
+			res.body.Errors[0].Code.should.equal("InvalidParameterValue");
+			res.body.Errors[0].Message.should.contain("invalid SellerSKU");
+			done();
+		});
+
+	});
+
+
+
+
+
+
+	describe('GetCompetitivePricingForASIN - Good Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetCompetitivePricingForASIN')
+			.send({
+				MarketplaceId : "ATVPDKIKX0DER",
+				ASINList: [
+					'B00C7EXSNS'
+				]
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});			
+
+
+		it('should return expected data', function(done) {
+			res.status.should.equal(200);
+			res.body.Products[0].ASIN.should.equal('B00C7EXSNS');
+			done();
+		});
+
+	});
+
+
+
+	describe('GetCompetitivePricingForASIN - Bad Request', function()  {
+
+		var res = {};
+
+		before(function(done) {
+			api.post('/mymws/products/GetCompetitivePricingForASIN')
+			.send({
+				MarketplaceId : "ATVPDKIKX0DER",
+				ASINList: [
+					'XX'	// Intentional invalid ASIN
+				]
+			})
+			.end(function(err, response){
+				if (err) return done(err);
+				res = response;
+				done();
+			});
+		});			
+
+
+		it('should return expected error result.', function(done) {
+			res.status.should.equal(200);
+			res.body.Errors[0].Message.should.equal("ASIN XX is not valid for marketplace ATVPDKIKX0DER");
+			done();
+		});
+
+	});
+
 
 
 });
