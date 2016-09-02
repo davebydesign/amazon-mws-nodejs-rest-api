@@ -4,8 +4,7 @@ var
 	multer     = require('multer'),
 	upload     = multer(),
 	MyMWSClass = require('libs/mymws'),
-	MWSCreds   = require('libs/mymws/credentials.js'),
-	MyMWS      = new MyMWSClass(MWSCreds);
+	MyMWS      = new MyMWSClass();
 
 module.exports = router;
 
@@ -35,7 +34,7 @@ router.post('/ListSubscriptionsCount', upload.array(), function (req, res, next)
 		res.status(500).send(err);
 	});
 
-})
+});
 
 
 
@@ -53,7 +52,7 @@ router.post('/ListSubscriptionsCountByNextToken', upload.array(), function (req,
 		res.status(500).send(err);
 	});
 
-})
+});
 
 
 

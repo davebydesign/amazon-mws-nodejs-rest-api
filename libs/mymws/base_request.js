@@ -11,10 +11,10 @@ var
 
 
 module.exports = class AmazonMwsRequest {
-	constructor(creds) {
+	constructor() {
 		this.deferred = MyPromise.pending();
 		this.query = {};
-		this.creds          = creds;
+		//this.creds          = creds;
 		this.httpVerb       = "POST";
 		this.host           = "mws.amazonservices.com";
 		this.port           = 443;
@@ -28,30 +28,32 @@ module.exports = class AmazonMwsRequest {
 	}
 
 	resetQuery() {
-		/*
-				this.query["Version"] = "2011-10-01";
-		this.query["SellerId"] = creds.MerchantId;
-		 */
-		
-		 if (this.query["Version"]) {
-		 	this.Version = this.query["Version"];
+
+		 if (this.query.Version) {
+		 	this.Version = this.query.Version;
 		 }
 
-		 if (this.query["SellerId"]) {
-		 	this.SellerId = this.creds.MerchantId;
+		 if (this.query.SellerId) {
+		 	this.SellerId = process.env.MWS_MerchantId;
 		 	this.Merchant = null;		 	
 		 }
 
-		 if (this.query["Merchant"]) {
-		 	this.Merchant = this.creds.MerchantId;
+		 if (this.query.Merchant) {
+		 	this.Merchant = process.env.MWS_MerchantId;
 		 	this.SellerId = null;		 	
 		 }
 
 
 		this.query = {
+			/*
 			AWSAccessKeyId   : this.creds.AccessKeyId 		|| '',
 			SecretAccessKey  : this.creds.SecretAccessKey 	|| '',
 			MarketplaceId    : this.creds.MarketplaceId,
+			*/
+		
+			AWSAccessKeyId   : process.env.MWS_AccessKeyId,
+			SecretAccessKey  : process.env.MWS_SecretAccessKey,
+			MarketplaceId    : process.env.MWS_MarketplaceId,
 			SignatureMethod  : "HmacSHA256",
 			SignatureVersion : 2,
 			Timestamp        : new Date().toISOString(),
@@ -60,14 +62,14 @@ module.exports = class AmazonMwsRequest {
 		//if (this.sellerOrMerchant == "Seller") this.query["SellerId"] = this.creds.MerchantId;
 		//if (this.sellerOrMerchant == "Merchant") this.query["Merchant"] = this.creds.MerchantId;
 		
-		this.query["Version"] = this.Version;
+		this.queryVersion = this.Version;
 
 		if (this.SellerId) {
-			this.query["SellerId"] = this.SellerId;
+			this.querySellerId = this.SellerId;
 		}
 
 		if (this.Merchant) {
-			this.query["Merchant"] = this.Merchant;
+			this.queryMerchant = this.Merchant;
 		}
 
 		this.httpBody       = "";
@@ -147,7 +149,7 @@ module.exports = class AmazonMwsRequest {
 
 	buildQuery(params) {
 		
-		this.query["Action"] = this.requestSchema.title;
+		this.query.Action = this.requestSchema.title;
 		this.throttling = this.requestSchema.throttling;
 
 		if (this.requestSchema.title === "GetServiceStatus") return;
@@ -288,7 +290,7 @@ module.exports = class AmazonMwsRequest {
 			var parser = new xml2js.Parser(parserOptions);
 			parser.addListener('end', function (result) {
 			  // Throw an error if there was a problem reported
-			  if (result.Error != null) throw(Error.Code + ": " + Error.Message);
+			  if (result.Error !== null) throw(Error.Code + ": " + Error.Message);
 			  			
 			  callback(result);
 			});
@@ -319,8 +321,8 @@ module.exports = class AmazonMwsRequest {
 	}
 
 	signQueryString() {
-		var hash = crypto.createHmac("sha256", this.creds.SecretAccessKey);
-		this.query['Signature'] = hash.update(this.queryString).digest("base64");
+		var hash = crypto.createHmac("sha256", process.env.MWS_SecretAccessKey);
+		this.query.Signature = hash.update(this.queryString).digest("base64");
 	}
 
 	setHeaders() {
@@ -332,7 +334,7 @@ module.exports = class AmazonMwsRequest {
 			'User-Agent'     : this.appName + '/' + this.appVersion + ' (Language=' + this.appLanguage + ')',
 			'Content-Type'   : this.contentType,
 			'Content-Length' : this.httpBody.length
-		}
+		};
 		if (this.upload) {
 			this.headers['Content-MD5'] = cryto.createHash('md5').update(this.httpBody).digest("base64");
 		}
@@ -353,7 +355,7 @@ module.exports = class AmazonMwsRequest {
 		return this.deferred.promise;		
 	}
 
-}
+};
 
 
 

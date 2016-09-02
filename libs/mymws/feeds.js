@@ -3,10 +3,10 @@ var
 
 module.exports = class FeedsRequest extends AmazonMwsRequest {
 
-	constructor(creds) {
-		super(creds);
+	constructor() {
+		super();
 		this.version          = "2009-01-01";
-		this.sellerOrMerchant = "Seller";
+		this.SellerId         = process.env.MWS_MerchantId;
 		this.path             = "/";
 	}
 

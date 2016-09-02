@@ -16,23 +16,23 @@ var
 	WebstoreRequest             = require('./webstore');	
 
 
-module.exports = class MyMWSClass {
-	constructor(creds) {
-		this.CartInformation      = new CartInformationRequest(creds);  
-		this.CustomerInformation  = new CustomerInformationRequest(creds);
-		this.Feeds                = new FeedsRequest(creds);
-		this.Finances             = new FinancesRequest(creds);
-		this.FulfillmentInbound   = new FulfillmentInboundRequest(creds);
-		this.FulfillmentInventory = new FulfillmentInventoryRequest(creds);
-		this.FulfillmentOutbound  = new FulfillmentOutboundRequest(creds);
-		this.MerchantFulfillment  = new MerchantFulfillmentRequest(creds);
-		this.Orders               = new OrdersRequest(creds);
-		this.Products             = new ProductsRequest(creds);
-		this.Recommendations      = new RecommendationsRequest(creds);
-		this.Reports              = new ReportsRequest(creds);
-		this.Sellers              = new SellersRequest(creds);
-		this.Subscriptions        = new SubscriptionsRequest(creds);
-		this.Webstore             = new WebstoreRequest(creds);
+module.exports =  class MyMWSClass {
+	constructor() {
+		this.CartInformation      = new CartInformationRequest();  
+		this.CustomerInformation  = new CustomerInformationRequest();
+		this.Feeds                = new FeedsRequest();
+		this.Finances             = new FinancesRequest();
+		this.FulfillmentInbound   = new FulfillmentInboundRequest();
+		this.FulfillmentInventory = new FulfillmentInventoryRequest();
+		this.FulfillmentOutbound  = new FulfillmentOutboundRequest();
+		this.MerchantFulfillment  = new MerchantFulfillmentRequest();
+		this.Orders               = new OrdersRequest();
+		this.Products             = new ProductsRequest();
+		this.Recommendations      = new RecommendationsRequest();
+		this.Reports              = new ReportsRequest();
+		this.Sellers              = new SellersRequest();
+		this.Subscriptions        = new SubscriptionsRequest();
+		this.Webstore             = new WebstoreRequest();
 	}
 
 

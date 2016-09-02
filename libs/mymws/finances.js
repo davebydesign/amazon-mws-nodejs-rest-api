@@ -2,10 +2,10 @@ var
 	AmazonMwsRequest = require('./base_request');
 
 class FinancesRequestCall extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2015-05-01";
-		this.query["SellerId"] = creds.MerchantId;
+	constructor() {
+		super();
+		this.query.Version = "2015-05-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
 		this.path = "/Finances/2015-05-01";
 	}
 }

@@ -2,11 +2,11 @@ var
 	AmazonMwsRequest = require('./base_request');
 
 module.exports = class CustomerInformationRequest extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2014-03-01";
-		this.query["SellerId"] = creds.MerchantId;
-		this.path = "/CustomerInformation";
+	constructor() {
+		super();
+		this.query.Version  = "2014-03-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
+		this.path           = "/CustomerInformation";
 	}
 
 	ListCustomers(params) {

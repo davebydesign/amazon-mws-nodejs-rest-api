@@ -4,8 +4,7 @@ var
 	multer     = require('multer'),
 	upload     = multer(),
 	MyMWSClass = require('libs/mymws'),
-	MWSCreds   = require('libs/mymws/credentials.js'),
-	MyMWS      = new MyMWSClass(MWSCreds);
+	MyMWS      = new MyMWSClass();
 
 module.exports = router;
 

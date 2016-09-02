@@ -3,11 +3,11 @@ var
 
 module.exports = class FulfillmentOutboundRequest extends AmazonMwsRequest {
 
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2010-10-01";
-		this.query["SellerId"] = creds.MerchantId;
-		this.path = "/FulfillmentOutboundShipment/2010-10-01";
+	constructor() {
+		super();
+		this.query.Version  = "2010-10-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
+		this.path           = "/FulfillmentOutboundShipment/2010-10-01";
 	}
 
 	GetFulfillmentPreview(params) {

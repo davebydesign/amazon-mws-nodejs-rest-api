@@ -5,10 +5,10 @@ var
 
 
 class ProductsRequestCall extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
+	constructor() {
+		super();
 		this.query.Version = "2011-10-01";
-		this.query.SellerId = creds.MerchantId;
+		this.query.SellerId = process.env.MWS_MerchantId;
 		this.path = "/Products/2011-10-01";
 	}
 }
@@ -20,15 +20,13 @@ class ProductsRequestCall extends AmazonMwsRequest {
 
 module.exports = class ProductsRequest  {
 
-	constructor(creds) {
-		this.creds = creds;
-	}
+	constructor() {}
 
 
 	/*** TESTED ***/
 	ListMatchingProducts(params) {
 		
-		let Call = new ProductsRequestCall(this.creds);
+		let Call = new ProductsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "ListMatchingProducts",

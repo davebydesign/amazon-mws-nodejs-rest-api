@@ -1,6 +1,8 @@
 require('app-module-path').addPath(__dirname);
 require('use-strict');
 
+require('dotenv').config();
+
 var 
     port        = 8080,
     express     = require('express'),
