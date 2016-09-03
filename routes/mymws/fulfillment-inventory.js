@@ -1,4 +1,3 @@
-
 var 
 	express    = require('express'),
 	router     = express.Router(),
@@ -6,30 +5,20 @@ var
 	upload     = multer(),
 	MyMWS      = require('libs/mymws'),
 	routes 	   = [
-		'ListMatchingProducts',
-		'GetMatchingProduct',
-		'GetMatchingProductForId',
-		'GetCompetitivePricingForSKU',
-		'GetCompetitivePricingForASIN',
-		'GetLowestOfferListingsForSKU',
-		'GetLowestOfferListingsForASIN',
-		'GetLowestPricedOffersForSKU',
-		'GetLowestPricedOffersForASIN',
-		'GetMyPriceForSKU',
-		'GetMyPriceForASIN',
-		'GetProductCategoriesForSKU',
-		'GetProductCategoriesForASIN',
+		'ListInventorySupply',
+		'ListInventorySupplyByNextToken',
 		'GetServiceStatus'
 	];
 
 routes.forEach(function(route) {
 	router.post('/'+route, upload.array(), function (req, res, next) {
-		MyMWS.Products[route](req.body)
+		MyMWS.FulfillmentInventory[route](req.body)
 		.then (function (result) { res.json(result);          })
 		.catch(function (err)    { res.status(500).send(err); });
 	});
 });
 
 module.exports = router;
+
 
 

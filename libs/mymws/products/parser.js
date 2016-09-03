@@ -1,11 +1,14 @@
 var _  = require('lodash');
 
 function forceArray(ArrayOrObj) {
+	/*
 	if (_.isArray(ArrayOrObj))
 		return ArrayOrObj;
 	else
 		return [ArrayOrObj];
-	//return (_.isArray(ArrayOrObj)) ? ArrayOrObj : [ArrayOrObj];
+	*/
+
+	return (_.isArray(ArrayOrObj)) ? ArrayOrObj : [ArrayOrObj];
 }
 
 class ParserClass {
