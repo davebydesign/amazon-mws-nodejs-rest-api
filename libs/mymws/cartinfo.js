@@ -1,7 +1,8 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class CartInformationRequest extends AmazonMwsRequest {
+
+class CartInformationRequest extends AmazonMwsRequest {
 	constructor() {
 		super();
 		this.query.Version  = "2014-03-01";
@@ -142,3 +143,5 @@ module.exports = class CartInformationRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+module.exports = new CartInformationRequest();

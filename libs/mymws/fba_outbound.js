@@ -1,7 +1,9 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class FulfillmentOutboundRequest extends AmazonMwsRequest {
+
+
+class FulfillmentOutboundRequest extends AmazonMwsRequest {
 
 	constructor() {
 		super();
@@ -258,3 +260,6 @@ module.exports = class FulfillmentOutboundRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+
+module.exports = new FulfillmentOutboundRequest();

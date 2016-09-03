@@ -10,19 +10,15 @@ class FinancesRequestCall extends AmazonMwsRequest {
 	}
 }
 
-module.exports = class FinancesRequest {
-	constructor(creds) {
-		this.creds = creds;
-	}
 
 
-
-
+class FinancesRequest {
+	constructor() {}
 
 
 	ListFinancialEventGroups(params) {
 
-		let Call = new FinancesRequestCall(this.creds);
+		let Call = new FinancesRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "ListFinancialEventGroups",
@@ -72,7 +68,7 @@ module.exports = class FinancesRequest {
 
 	ListFinancialEventGroupsByNextToken(params) {
 
-		let Call = new FinancesRequestCall(this.creds);
+		let Call = new FinancesRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "ListFinancialEventGroupsByNextToken",
@@ -109,7 +105,7 @@ module.exports = class FinancesRequest {
 
 
 	ListFinancialEvents(params) {
-		let Call = new FinancesRequestCall(this.creds);	
+		let Call = new FinancesRequestCall();	
 		
 		Call.requestSchema = {
 			"title"      : "ListFinancialEvents",
@@ -165,7 +161,7 @@ module.exports = class FinancesRequest {
 	}
 
 	ListFinancialEventsByNextToken(params) {
-		let Call = new FinancesRequestCall(this.creds);	
+		let Call = new FinancesRequestCall();	
 
 		Call.requestSchema = {
 			"title"      : "ListFinancialEventsByNextToken",
@@ -197,7 +193,7 @@ module.exports = class FinancesRequest {
 	}
 
 	GetServiceStatus(params) {
-		let Call = new FinancesRequestCall(this.creds);	
+		let Call = new FinancesRequestCall();	
 		
 		Call.requestSchema = {
 			"title"      : "GetServiceStatus",
@@ -223,3 +219,6 @@ module.exports = class FinancesRequest {
 	}
 
 }
+
+
+module.exports = new FinancesRequest();

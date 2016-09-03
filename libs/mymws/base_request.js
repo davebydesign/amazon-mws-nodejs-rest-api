@@ -290,7 +290,7 @@ module.exports = class AmazonMwsRequest {
 			var parser = new xml2js.Parser(parserOptions);
 			parser.addListener('end', function (result) {
 			  // Throw an error if there was a problem reported
-			  if (result.Error !== null) throw(Error.Code + ": " + Error.Message);
+			  if (result.Error) throw(Error.Code + ": " + Error.Message);
 			  			
 			  callback(result);
 			});

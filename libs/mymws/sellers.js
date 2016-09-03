@@ -1,11 +1,13 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class SellersRequest extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2011-07-01";
-		this.query["SellerId"] = creds.MerchantId;
+
+
+class SellersRequest extends AmazonMwsRequest {
+	constructor() {
+		super();
+		this.query.Version = "2011-07-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
 		this.path = "/Sellers/2011-07-01";		
 	}
 
@@ -78,3 +80,7 @@ module.exports = class SellersRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+
+
+module.exports = new SellersRequest();

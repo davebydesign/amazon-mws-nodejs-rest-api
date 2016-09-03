@@ -1,11 +1,13 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class MerchantFulfillmentRequest extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2015-06-01";
-		this.query["SellerId"] = "creds.MerchantId";
+
+
+class MerchantFulfillmentRequest extends AmazonMwsRequest {
+	constructor() {
+		super();
+		this.query.Version = "2015-06-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
 		this.path = "/MerchantFulfillment/2015-06-01";
 	}
 
@@ -98,3 +100,6 @@ module.exports = class MerchantFulfillmentRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+
+module.exports = new MerchantFulfillmentRequest();

@@ -1,11 +1,13 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class SubscriptionsRequest extends AmazonMwsRequest {
-	constructor(creds) {
-		super(creds);
-		this.query["Version"] = "2013-07-01";
-		this.query["SellerId"] = creds.MerchantId;
+
+
+class SubscriptionsRequest extends AmazonMwsRequest {
+	constructor() {
+		super();
+		this.query.Version = "2013-07-01";
+		this.query.SellerId = process.env.MWS_MerchantId;
 		this.path = "/Subscriptions/2013-07-01";
 	}
 
@@ -159,3 +161,5 @@ module.exports = class SubscriptionsRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+module.exports = new SubscriptionsRequest();

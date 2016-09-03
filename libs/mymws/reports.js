@@ -4,23 +4,21 @@ var
 class ReportsRequestCall extends AmazonMwsRequest {
 	constructor(creds) {
 		super(creds);
-		this.query["Version"] = "2009-01-01";
-		this.query["Merchant"] = creds.MerchantId;
+		this.query.Version = "2009-01-01";
+		this.query.Merchant = process.env.MWS_MerchantId;
 		this.path = "/";
 	}
 }
 
 
-module.exports = class ReportsRequest  {
+class ReportsRequest  {
 
-	constructor(creds) {
-		this.creds = creds;
-	}
+	constructor() {}
 
 
 
 	RequestReport(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "RequestReport",
@@ -85,7 +83,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportRequestList(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportRequestList",
@@ -160,7 +158,7 @@ module.exports = class ReportsRequest  {
 	}
 
 	GetReportRequestListByNextToken(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportRequestListByNextToken",
@@ -197,7 +195,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportRequestCount(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportRequestCount",
@@ -263,7 +261,7 @@ module.exports = class ReportsRequest  {
 
 
 	CancelReportRequests(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "CancelReportRequests",
@@ -338,7 +336,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportList(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportList",
@@ -412,7 +410,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportListByNextToken(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportListByNextToken",
@@ -449,7 +447,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportCount(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportCount",
@@ -508,7 +506,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReport(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReport",
@@ -545,7 +543,7 @@ module.exports = class ReportsRequest  {
 
 
 	ManageReportSchedule(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "ManageReportSchedule",
@@ -594,7 +592,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportScheduleList(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportScheduleList",
@@ -647,7 +645,7 @@ module.exports = class ReportsRequest  {
 
 
 	GetReportScheduleCount(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "GetReportScheduleCount",
@@ -686,7 +684,7 @@ module.exports = class ReportsRequest  {
 
 
 	UpdateReportAcknowledgements(params) {
-		let Call = new ReportsRequestCall(this.creds);
+		let Call = new ReportsRequestCall();
 
 		Call.requestSchema = {
 			"title"      : "UpdateReportAcknowledgements",
@@ -727,3 +725,7 @@ module.exports = class ReportsRequest  {
 		});
 	}
 }
+
+
+
+module.exports = new ReportsRequest();

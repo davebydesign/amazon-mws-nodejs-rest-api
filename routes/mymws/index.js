@@ -4,6 +4,11 @@ var
 
 module.exports = router;
 
+router.use(function(err, req, res, next) {
+	res.json(err);
+});
+
+
 router.use('/cartinfo', 			require('./cartinfo.js'));
 router.use('/customerinfo', 		require('./customerinfo.js'));
 router.use('/feeds', 				require('./feeds.js'));

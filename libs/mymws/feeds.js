@@ -1,7 +1,9 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class FeedsRequest extends AmazonMwsRequest {
+
+
+class FeedsRequest extends AmazonMwsRequest {
 
 	constructor() {
 		super();
@@ -229,4 +231,7 @@ module.exports = class FeedsRequest extends AmazonMwsRequest {
 		return deferred.promise;
 	}
 }
+
+
+module.exports = new FeedsRequest();
 

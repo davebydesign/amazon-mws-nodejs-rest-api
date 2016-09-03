@@ -1,17 +1,14 @@
 var 
 	express    = require('express'),
 	router     = express.Router(),
+
+	// Necessary to  accept data in "multipart/form-data" format
 	multer     = require('multer'),
 	upload     = multer(),
-	MyMWSClass = require('libs/mymws'),
-	MyMWS      = new MyMWSClass();
+
+	MyMWS      = require('libs/mymws');
 
 module.exports = router;
-
-router.use(function(err, req, res, next) {
-	res.json(err);
-});
-
 
 
 /*
@@ -36,7 +33,7 @@ router.post('/RequestReport', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -51,7 +48,7 @@ router.post('/GetReportRequestList', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -65,7 +62,7 @@ router.post('/GetReportRequestListByNextToken', upload.array(), function (req, r
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -79,7 +76,7 @@ router.post('/GetReportRequestCount', upload.array(), function (req, res, next) 
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -93,7 +90,7 @@ router.post('/CancelReportRequests', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -107,7 +104,7 @@ router.post('/GetReportList', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -121,7 +118,7 @@ router.post('/GetReportListByNextToken', upload.array(), function (req, res, nex
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -136,7 +133,7 @@ router.post('/GetReportCount', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -151,7 +148,7 @@ router.post('/GetReport', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -165,7 +162,7 @@ router.post('/ManageReportSchedule', upload.array(), function (req, res, next) {
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -179,7 +176,7 @@ router.post('/GetReportScheduleList', upload.array(), function (req, res, next) 
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -193,7 +190,7 @@ router.post('/GetReportScheduleCount', upload.array(), function (req, res, next)
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 
 
@@ -207,6 +204,6 @@ router.post('/UpdateReportAcknowledgements', upload.array(), function (req, res,
 	.catch(function (err) {
 		res.status(500).send(err);
 	});
-})
+});
 
 

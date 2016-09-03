@@ -1,17 +1,14 @@
 var 
 	express    = require('express'),
 	router     = express.Router(),
+
+	// Necessary to  accept data in "multipart/form-data" format
 	multer     = require('multer'),
 	upload     = multer(),
-	MyMWSClass = require('libs/mymws'),
-	MyMWS      = new MyMWSClass();
+
+	MyMWS      = require('libs/mymws');
 
 module.exports = router;
-
-router.use(function(err, req, res, next) {
-	res.json(err);
-});
-
 
 
 

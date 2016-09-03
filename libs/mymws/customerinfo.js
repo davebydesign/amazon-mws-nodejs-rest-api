@@ -1,7 +1,8 @@
 var 
 	AmazonMwsRequest = require('./base_request');
 
-module.exports = class CustomerInformationRequest extends AmazonMwsRequest {
+
+class CustomerInformationRequest extends AmazonMwsRequest {
 	constructor() {
 		super();
 		this.query.Version  = "2014-03-01";
@@ -148,3 +149,5 @@ module.exports = class CustomerInformationRequest extends AmazonMwsRequest {
 		});
 	}
 }
+
+module.exports = new CustomerInformationRequest();

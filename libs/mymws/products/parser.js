@@ -225,7 +225,7 @@ class ParserClass {
 		while (temp.Parent) {
 			temp = temp.Parent;
 			FullCategoryName = temp.ProductCategoryName + " | " + FullCategoryName;
-			FullCategoryIDPath = temp.ProductCategoryId + " | " + FullCategoryIDPath
+			FullCategoryIDPath = temp.ProductCategoryId + " | " + FullCategoryIDPath;
 		}
 
 		return {
@@ -234,7 +234,7 @@ class ParserClass {
 			FullCategoryName    : FullCategoryName,
 			FullCategoryIDPath  : FullCategoryIDPath
 
-		}
+		};
 	}
 
 
@@ -271,7 +271,7 @@ class ParserClass {
 			IsFulfilledByAmazon      : Offer.IsFulfilledByAmazon,
 			IsBuyBoxWinner           : Offer.IsBuyBoxWinner,
 			IsFeaturedMerchant       : Offer.IsFeaturedMerchant
-		}
+		};
 	}
 
 	GetLowestPricedOffersParseBuyBoxPrices(Summary) {
@@ -315,7 +315,7 @@ class ParserClass {
 				New         : 0,
 				Collectible : 0
 			}
-		}
+		};
 
 		for (let Offer of Offers.OfferCount) {
 			if (Offer.$.fulfillmentChannel === "Amazon" && Offer.$.condition === "used") {
@@ -354,7 +354,7 @@ class ParserClass {
 				New         : 0,
 				Collectible : 0
 			}
-		}
+		};
 
 		for (let Offer of Prices.LowestPrice) {
 			if (Offer.$.fulfillmentChannel === "Amazon" && Offer.$.condition === "used") {
@@ -505,7 +505,7 @@ class ParserClass {
 			Used        : getCount("Used"),
 			Collectible : getCount("Collectible"),
 			Any         : getCount("Any")
-		}
+		};
 	}
 
 
