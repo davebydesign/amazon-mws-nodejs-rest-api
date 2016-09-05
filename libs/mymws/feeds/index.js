@@ -19,15 +19,11 @@ class FeedsRequestCall extends AmazonMwsRequest {
 		if (CallName==='GetFeedSubmissionCount') {
 			if ('FeedTypeList' in params)				this.listify('FeedTypeList.Type', params.FeedTypeList);
 			if ('FeedProcessingStatusList' in params)	this.listify('FeedProcessingStatusList.Status', params.FeedProcessingStatusList);
-			if ('SubmittedFromDate' in params)			this.query.SubmittedFromDate = new Date(params.SubmittedFromDate);
-			if ('SubmittedToDate' in params)			this.query.SubmittedToDate = new Date(params.SubmittedToDate);
 		}
 
 		if (CallName==='CancelFeedSubmissions') {
 			if ('FeedSubmissionIdList' in params)	this.listify('FeedSubmissionIdList.Id', params.FeedSubmissionIdList);
 			if ('FeedTypeListt' in params)			this.listify('FeedTypeList.Type', params.FeedTypeList);
-			if ('SubmittedFromDate' in params)		this.query.SubmittedFromDate = new Date(params.SubmittedFromDate);
-			if ('SubmittedToDate' in params)		this.query.SubmittedToDate = new Date(params.SubmittedToDate);
 		}
 
 		return this.MakeCall(CallName, params);

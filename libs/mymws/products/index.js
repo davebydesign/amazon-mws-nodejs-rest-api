@@ -3,7 +3,7 @@ var
 	Parser = require('./parser'),
 	Schema = require('./schema.js');
 
-class ProductsRequestCall extends AmazonMwsRequest {
+class RequestCall extends AmazonMwsRequest {
 	constructor(CallName, params) {
 		super();
 		this.query.Version  = "2011-10-01";
@@ -28,20 +28,20 @@ class ProductsRequestCall extends AmazonMwsRequest {
 }
 
 class ProductsRequest  {
-	ListMatchingProducts			(params) { return new ProductsRequestCall('ListMatchingProducts', 			params); }
-	GetMatchingProduct 				(params) { return new ProductsRequestCall('GetMatchingProduct', 			params); }
-	GetMatchingProductForId			(params) { return new ProductsRequestCall('GetMatchingProductForId', 		params); }
-	GetCompetitivePricingForSKU		(params) { return new ProductsRequestCall('GetCompetitivePricingForSKU', 	params); } /* Gets the new and used buy box price */	
-	GetCompetitivePricingForASIN	(params) { return new ProductsRequestCall('GetCompetitivePricingForASIN', 	params); } /* Gets the new and used buy box price */
-	GetLowestOfferListingsForSKU	(params) { return new ProductsRequestCall('GetLowestOfferListingsForSKU', 	params); }
-	GetLowestOfferListingsForASIN	(params) { return new ProductsRequestCall('GetLowestOfferListingsForASIN',	params); }
-	GetLowestPricedOffersForSKU		(params) { return new ProductsRequestCall('GetLowestPricedOffersForSKU', 	params); }
-	GetLowestPricedOffersForASIN	(params) { return new ProductsRequestCall('GetLowestPricedOffersForASIN', 	params); }
-	GetMyPriceForSKU				(params) { return new ProductsRequestCall('GetMyPriceForSKU', 				params); }
-	GetMyPriceForASIN				(params) { return new ProductsRequestCall('GetMyPriceForASIN', 				params); }
-	GetProductCategoriesForSKU		(params) { return new ProductsRequestCall('GetProductCategoriesForSKU', 	params); }
-	GetProductCategoriesForASIN		(params) { return new ProductsRequestCall('GetProductCategoriesForASIN', 	params); }
-	GetServiceStatus				(params) { return new ProductsRequestCall('GetServiceStatus', 				params); }
+	ListMatchingProducts			(params) { return new RequestCall('ListMatchingProducts', 			params); }
+	GetMatchingProduct 				(params) { return new RequestCall('GetMatchingProduct', 			params); }
+	GetMatchingProductForId			(params) { return new RequestCall('GetMatchingProductForId', 		params); }
+	GetCompetitivePricingForSKU		(params) { return new RequestCall('GetCompetitivePricingForSKU', 	params); } /* Gets the new and used buy box price */	
+	GetCompetitivePricingForASIN	(params) { return new RequestCall('GetCompetitivePricingForASIN', 	params); } /* Gets the new and used buy box price */
+	GetLowestOfferListingsForSKU	(params) { return new RequestCall('GetLowestOfferListingsForSKU', 	params); }
+	GetLowestOfferListingsForASIN	(params) { return new RequestCall('GetLowestOfferListingsForASIN',	params); }
+	GetLowestPricedOffersForSKU		(params) { return new RequestCall('GetLowestPricedOffersForSKU', 	params); }
+	GetLowestPricedOffersForASIN	(params) { return new RequestCall('GetLowestPricedOffersForASIN', 	params); }
+	GetMyPriceForSKU				(params) { return new RequestCall('GetMyPriceForSKU', 				params); }
+	GetMyPriceForASIN				(params) { return new RequestCall('GetMyPriceForASIN', 				params); }
+	GetProductCategoriesForSKU		(params) { return new RequestCall('GetProductCategoriesForSKU', 	params); }
+	GetProductCategoriesForASIN		(params) { return new RequestCall('GetProductCategoriesForASIN', 	params); }
+	GetServiceStatus				(params) { return new RequestCall('GetServiceStatus', 				params); }
 }
 
 module.exports = new ProductsRequest();
