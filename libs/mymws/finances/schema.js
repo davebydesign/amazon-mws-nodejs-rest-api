@@ -1,6 +1,6 @@
 module.exports = {
 
-	ListFinancialEventGroups : {
+	"ListFinancialEventGroups" : {
 		"title"      : "ListFinancialEventGroups",
 		"throttling" : { 
 			"name" : "ListFinancialEventGroups",
@@ -35,7 +35,7 @@ module.exports = {
 	},
 
 
-	ListFinancialEventGroupsByNextToken : {
+	"ListFinancialEventGroupsByNextToken" : {
 		"title"      : "ListFinancialEventGroupsByNextToken",
 		"throttling" : { 
 			"name" : "ListFinancialEventGroupsByNextToken",
@@ -54,12 +54,12 @@ module.exports = {
 
 
 		},
-		additionalProperties : false,
-		required : ['NextToken']
+		"additionalProperties" : false,
+		"required" : ['NextToken']
 	},
 
 
-	ListFinancialEvents : {
+	"ListFinancialEvents" : {
 		"title"      : "ListFinancialEvents",
 		"throttling" : { 
 			"name" : "ListFinancialEvents",
@@ -106,7 +106,7 @@ module.exports = {
 	},
 
 
-	ListFinancialEventsByNextToken : {
+	"ListFinancialEventsByNextToken" : {
 		"title"      : "ListFinancialEventsByNextToken",
 		"throttling" : { 
 			"name" : "ListFinancialEventsByNextToken",
@@ -125,12 +125,12 @@ module.exports = {
 
 
 		},
-		additionalProperties : false,
-		required : ['NextToken']
+		"additionalProperties" : false,
+		"required" : ['NextToken']
 	},
 
 
-	GetServiceStatus : {
+	"GetServiceStatus" : {
 			"title"      : "GetServiceStatus",
 			"throttling" : { 
 				"name" : "Finances.GetServiceStatus",
@@ -141,7 +141,7 @@ module.exports = {
 			"type"       : "object",
 			"properties" : {
 			},
-			additionalProperties : false
+			"additionalProperties" : false
 		}
 
 

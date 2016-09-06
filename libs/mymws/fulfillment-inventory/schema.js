@@ -1,14 +1,69 @@
 module.exports = {
-	ListInventorySupply : {
 
+	"ListInventorySupply" : {
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
 
-	ListInventorySupplyByNextToken : {
+	"ListInventorySupplyByNextToken" : {
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
 
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
 
-	GetServiceStatus : {
+	"GetServiceStatus" : {
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
 
+		},
+		"additionalProperties" : false,
+		"required" : []
 	}
 
 }; 

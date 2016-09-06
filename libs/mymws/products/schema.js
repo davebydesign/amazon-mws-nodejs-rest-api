@@ -1,35 +1,35 @@
 module.exports = {
 
 
-	ListMatchingProducts : {
-		title      : 'ListMatchingProducts',
-		throttling : { 
-			name : 'ListMatchingProducts',
-			maxRequestQuota : 20,
-			hourlyRestoreRate : 720	// One request every five seconds
+	"ListMatchingProducts" : {
+		"title"      : 'ListMatchingProducts',
+		"throttling" : { 
+			"name" : 'ListMatchingProducts',
+			"maxRequestQuota" : 20,
+			"hourlyRestoreRate" : 720	// One request every five seconds
 		},
-		type       : 'object',
-		properties : {
-			MarketplaceId : {
-				name        : 'MarketplaceId',
-				description : '',
-				type        : 'string'
+		"type"       : 'object',
+		"properties" : {
+			"MarketplaceId" : {
+				"name"        : 'MarketplaceId',
+				"description" : '',
+				"type"        : 'string'
 			},
-			Query : {
-				name : 'Query',
-				type : 'string'
+			"Query" : {
+				"name" : 'Query',
+				"type" : 'string'
 			},
-			QueryContextId : {
-				name : 'QueryContextId',
-				type : 'string'
+			"QueryContextId" : {
+				"name" : 'QueryContextId',
+				"type" : 'string'
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'Query']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'Query']
 	},
 
 
-	GetMatchingProduct : {
+	"GetMatchingProduct" : {
 		"title"      : "GetMatchingProduct",
 		"throttling" : { 
 			"name" : "GetMatchingProduct",
@@ -55,12 +55,12 @@ module.exports = {
 				}
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASINList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASINList']
 	},
 
 
-	GetMatchingProductForId : {
+	"GetMatchingProductForId" : {
 		"title"      : "GetMatchingProductForId",
 		"throttling" : { 
 			"name" : "GetMatchingProductForId",
@@ -100,12 +100,12 @@ module.exports = {
 				}
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'IdList', 'IdType']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'IdList', 'IdType']
 	},
 
 
-	GetCompetitivePricingForSKU : {
+	"GetCompetitivePricingForSKU" : {
 		"title"      : "GetCompetitivePricingForSKU",
 		"throttling" : { 
 			"name" : "GetCompetitivePricing",
@@ -132,13 +132,13 @@ module.exports = {
 				}
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'SellerSKUList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'SellerSKUList']
 	},
 
 
 
-	GetCompetitivePricingForASIN : {
+	"GetCompetitivePricingForASIN" : {
 		"title"      : "GetCompetitivePricingForASIN",
 		"throttling" : { 
 			"name" : "GetCompetitivePricing",
@@ -165,13 +165,13 @@ module.exports = {
 				}
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASINList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASINList']
 	},
 
 
 
-	GetLowestOfferListingsForSKU  : {
+	"GetLowestOfferListingsForSKU"  : {
 		"title"      : "GetLowestOfferListingsForSKU",
 		"throttling" : { 
 			"name" : "GetLowestOfferListings",
@@ -211,13 +211,13 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'SellerSKUList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'SellerSKUList']
 	},
 
 
 
-	GetLowestOfferListingsForASIN : {
+	"GetLowestOfferListingsForASIN" : {
 		"title"      : "GetLowestOfferListingsForASIN",
 		"throttling" : { 
 			"name" : "GetLowestOfferListings",
@@ -257,13 +257,13 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASINList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASINList']
 	},
 
 
 
-	GetLowestPricedOffersForSKU : {
+	"GetLowestPricedOffersForSKU" : {
 		"title"      : "GetLowestPricedOffersForSKU",
 		"throttling" : { 
 			"name" : "GetLowestPricedOffers",
@@ -299,13 +299,13 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'SellerSKU', 'ItemCondition']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'SellerSKU', 'ItemCondition']
 	},
 
 
 
-	GetLowestPricedOffersForASIN : {
+	"GetLowestPricedOffersForASIN" : {
 		"title"      : "GetLowestPricedOffersForASIN",
 		"throttling" : { 
 			"name" : "GetLowestPricedOffers",
@@ -341,13 +341,13 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASIN', 'ItemCondition']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASIN', 'ItemCondition']
 	},
 
 
 
-	GetMyPriceForSKU : {
+	"GetMyPriceForSKU" : {
 		"title"      : "GetMyPriceForSKU",
 		"throttling" : { 
 			"name" : "GetMyPrice",
@@ -387,14 +387,14 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'SellerSKUList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'SellerSKUList']
 	},
 
 
 
 
-	GetMyPriceForASIN : {
+	"GetMyPriceForASIN" : {
 		"title"      : "GetMyPriceForASIN",
 		"throttling" : { 
 			"name" : "GetMyPrice",
@@ -434,13 +434,13 @@ module.exports = {
 				]
 			}
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASINList']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASINList']
 	},
 
 
 
-	GetProductCategoriesForSKU : {
+	"GetProductCategoriesForSKU" : {
 		"title"      : "GetProductCategoriesForSKU",
 		"throttling" : { 
 			"name" : "GetProductCategories",
@@ -463,13 +463,13 @@ module.exports = {
 			}
 
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'SellerSKU']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'SellerSKU']
 	},
 
 
 
-	GetProductCategoriesForASIN : {
+	"GetProductCategoriesForASIN" : {
 		"title"      : "GetProductCategoriesForASIN",
 		"throttling" : { 
 			"name" : "GetProductCategories",
@@ -492,13 +492,13 @@ module.exports = {
 			}
 
 		},
-		additionalProperties : false,
-		required : ['MarketplaceId', 'ASIN']
+		"additionalProperties" : false,
+		"required" : ['MarketplaceId', 'ASIN']
 	},
 
 
 
-	GetServiceStatus : {
+	"GetServiceStatus" : {
 		"title"      : "GetServiceStatus",
 		"throttling" : { 
 			"name" : "Products.GetServiceStatus",
@@ -510,7 +510,7 @@ module.exports = {
 		"properties" : {
 
 		},
-		additionalProperties : false
+		"additionalProperties" : false
 
 	}
 

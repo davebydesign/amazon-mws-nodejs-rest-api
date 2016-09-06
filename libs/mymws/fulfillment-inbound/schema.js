@@ -1,68 +1,485 @@
 module.exports = {
 
-	CreateInboundShipmentPlan :  { 
+	"CreateInboundShipmentPlan" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
 
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	CreateInboundShipment :  {  
 
+
+	"CreateInboundShipment" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	UpdateInboundShipment :  {  
 
+
+	"UpdateInboundShipment" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetPreorderInfo :  { 
 
+
+	"GetPreorderInfo" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ConfirmPreorder :  {  
 
+
+	"ConfirmPreorder" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetPrepInstructionsForSKU :  { 
 
+
+	"GetPrepInstructionsForSKU" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetPrepInstructionsForASIN :  { 
 
+
+	"GetPrepInstructionsForASIN" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	PutTransportContent :  {  
 
+
+	"PutTransportContent" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	EstimateTransportRequest :  { 
 
+
+	"EstimateTransportRequest" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetTransportContent :  {  
 
+
+	"GetTransportContent" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ConfirmTransportRequest :  {  
 
+
+	"ConfirmTransportRequest" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	VoidTransportRequest :  {  
 
+
+	"VoidTransportRequest" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetPackageLabels :  {  
 
+
+	"GetPackageLabels" :  {  
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetUniquePackageLabels :  { 
 
+
+	"GetUniquePackageLabels" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetPalletLabels :  { 
 
+
+	"GetPalletLabels" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetBillOfLading :  { 
 
+
+	"GetBillOfLading" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ListInboundShipments : {
 
+
+	"ListInboundShipments" : {
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ListInboundShipmentsByNextToken :  { 
 
+
+	"ListInboundShipmentsByNextToken" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ListInboundShipmentItems :  { 
 
+
+	"ListInboundShipmentItems" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	ListInboundShipmentItemsByNextToken :  { 
 
+
+	"ListInboundShipmentItemsByNextToken" :  { 
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	},
-	GetServiceStatus :  {
 
 
+	"GetServiceStatus" :  {
+		"title"       : "",
+		"description" : "",
+		"docs_url"    : "",
+		"throttling"  : {
+			"name"             : "",
+			"maxRequestQuota"  : 0,
+			"hourlyRestoreRate": 0
+		},
+		"type"      : "object",
+		"properties": {
+			"" : {
+				"name"       : "",
+				"description": "",
+				"type"       : ""
+			}
+
+		},
+		"additionalProperties" : false,
+		"required" : []
 	}
 
 }; 
