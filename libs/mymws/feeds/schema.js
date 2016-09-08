@@ -20,7 +20,6 @@ module.exports = {
 			"FeedType" : {
 				"name"        : "FeedType",
 				"description" : "A FeedType value indicating how the data should be processed.",
-				"type"        : "string",
 				"$ref"        : "/FeedType"
 			},
 
@@ -127,43 +126,88 @@ module.exports = {
 		"required" : ["NextToken"]
 	},
 
+
+
 	"GetFeedSubmissionCount" : {
-		"title"       : "",
-		"description" : "",
-		"docs_url"    : "",
+		"title"       : "GetFeedSubmissionCount",
+		"description" : "Returns a count of the feeds submitted in the previous 90 days.",
+		"docs_url"    : "http://docs.developer.amazonservices.com/en_US/feeds/Feeds_GetFeedSubmissionCount.html",
 		"throttling"  : {
-			"name"             : "",
-			"maxRequestQuota"  : 0,
-			"hourlyRestoreRate": 0
+			"name"             : "GetFeedSubmissionCount",
+			"maxRequestQuota"  : 10,
+			"hourlyRestoreRate": 80
 		},
 		"type"      : "object",
 		"properties": {
-			"" : {
-				"name"       : "",
-				"description": "",
-				"type"       : ""
+			"FeedTypeList" : {
+				"name"       : "FeedTypeList.Type",
+				"description": "A structured list of one or more FeedType values by which to filter the list of feed submissions.",
+				"type"        : "array",
+				"items"       : {
+					"$ref": "/FeedType"
+				}
+			},
+			"FeedProcessingStatusList" : {
+				"name"       : "FeedProcessingStatusList.Status",
+				"description": "A structured list of one or more feed processing statuses by which to filter the list of feed submissions.",
+				"type"        : "array",
+				"items"       : {
+					"$ref": "/FeedProcessingStatus"
+				}
+			},
+			"SubmittedFromDate" : {
+				"name"       : "SubmittedFromDate",
+				"description": "The earliest submission date that you are looking for.",
+				"type"       : "datetime"
+			},
+			"SubmittedToDate" : {
+				"name"       : "SubmittedToDate",
+				"description": "The latest submission date that you are looking for",
+				"type"       : "datetime"
 			}
-
 		},
 		"additionalProperties" : false,
 		"required" : []
 	},
+
+
 
 	"CancelFeedSubmissions" : {
-		"title"       : "",
-		"description" : "",
-		"docs_url"    : "",
+		"title"       : "CancelFeedSubmissions",
+		"description" : "http://docs.developer.amazonservices.com/en_US/feeds/Feeds_CancelFeedSubmissions.html",
+		"docs_url"    : "Cancels one or more feed submissions and returns a count of the feed submissions that were canceled.",
 		"throttling"  : {
-			"name"             : "",
-			"maxRequestQuota"  : 0,
-			"hourlyRestoreRate": 0
+			"name"             : "CancelFeedSubmissions",
+			"maxRequestQuota"  : 10,
+			"hourlyRestoreRate": 80
 		},
 		"type"      : "object",
 		"properties": {
-			"" : {
-				"name"       : "",
-				"description": "",
-				"type"       : ""
+			"FeedSubmissionIdList" : {
+				"name"       : "FeedSubmissionIdList.Id",
+				"description": "A structured list of FeedSubmmissionId values. If you pass in FeedSubmmissionId values in a request, other query conditions are ignored.",
+				"type" : "array",
+				"items"       : {
+					"type" : "string"
+				}
+			},
+			"FeedTypeList" : {
+				"name"       : "FeedTypeList.Type",
+				"description": "A structured list of one or more FeedType values by which to filter the list of feed submissions.",
+				"type"        : "array",
+				"items"       : {
+					"$ref": "/FeedType"
+				}
+			},
+			"SubmittedFromDate" : {
+				"name"       : "SubmittedFromDate",
+				"description": "The earliest submission date that you are looking for.",
+				"type"       : "datetime"
+			},
+			"SubmittedToDate" : {
+				"name"       : "SubmittedToDate",
+				"description": "The latest submission date that you are looking for.",
+				"type"       : "datetime"
 			}
 
 		},
@@ -171,26 +215,28 @@ module.exports = {
 		"required" : []
 	},
 
+
+
 	"GetFeedSubmissionResult" : {
-		"title"       : "",
-		"description" : "",
-		"docs_url"    : "",
+		"title"       : "GetFeedSubmissionResult",
+		"description" : "Returns the feed processing report and the Content-MD5 header.",
+		"docs_url"    : "http://docs.developer.amazonservices.com/en_US/feeds/Feeds_GetFeedSubmissionResult.html",
 		"throttling"  : {
-			"name"             : "",
-			"maxRequestQuota"  : 0,
-			"hourlyRestoreRate": 0
+			"name"             : "GetFeedSubmissionResult",
+			"maxRequestQuota"  : 15,
+			"hourlyRestoreRate": 60
 		},
 		"type"      : "object",
 		"properties": {
 			"" : {
-				"name"       : "",
-				"description": "",
-				"type"       : ""
+				"name"       : "FeedSubmissionId",
+				"description": "The identifier of the feed submission you are requesting a feed processing report for. You can get the FeedSubmissionId for a feed using the GetFeedSubmissionList operation",
+				"type"       : "string"
 			}
 
 		},
 		"additionalProperties" : false,
-		"required" : []
+		"required" : ["FeedSubmissionId"]
 	}
 
 }; 

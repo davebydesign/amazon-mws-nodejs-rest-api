@@ -1,28 +1,27 @@
 var 
 	MyPromise = require('bluebird'),
 	_         = require('lodash'),
-	https  = require('https'),
-	crypto = require('crypto'),
-	tls    = require('tls'),
-	qs     = require("querystring"),
-	xml2js = require('xml2js'),
-	Schemas = require('./schemas'),
+	https     = require('https'),
+	crypto    = require('crypto'),
+	tls       = require('tls'),
+	qs        = require("querystring"),
+	xml2js    = require('xml2js'),
+	Schemas   = require('./schemas'),
 	Validator = require('jsonschema').Validator;
 
 
 
 module.exports = class AmazonMwsRequest {
 	constructor() {
-		this.deferred = MyPromise.pending();
-		this.query = {};
-		//this.creds          = creds;
-		this.httpVerb       = "POST";
-		this.host           = "mws.amazonservices.com";
-		this.port           = 443;
-		this.appName        = "Node_MWS_Client";
-		this.appVersion     = "0.1.0";
-		this.appLanguage    = "Javascript / NodeJS";
-		this.contentType    = "application/x-www-form-urlencoded; charset=utf-8";
+		this.deferred    = MyPromise.pending();
+		this.query       = {};
+		this.httpVerb    = "POST";
+		this.host        = "mws.amazonservices.com";
+		this.port        = 443;
+		this.appName     = "Node_MWS_Client";
+		this.appVersion  = "0.1.0";
+		this.appLanguage = "Javascript / NodeJS";
+		this.contentType = "application/x-www-form-urlencoded; charset=utf-8";
 		this.resetQuery();
 	}
 
