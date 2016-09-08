@@ -1,31 +1,21 @@
-var 
-	AmazonMwsRequest = require('../base_request'),
-	Parser = require('./parser'),
-	Schema = require('./schema.js');
+var AmazonMwsParentRequest = require('../parent-request-class');
 
-class RequestCall extends AmazonMwsRequest {
-	constructor(CallName, params) {
-		super();
-		this.query.Version  = "2009-01-01";
-		this.query.Merchant = process.env.MWS_MerchantId;
-		this.path           = "/";
-		return this.MakeCall(CallName, params);
-	}
-
-	MakeCall(CallName, params) {
-		this.requestSchema = Schema[CallName];
-		return this.invoke(params, (result)=>{
-			if (this.detectResponseError(result)) return this.deferred.reject(this.responseError);
-
-			if (Parser[CallName]) {
-				let parsedResult = Parser[CallName](result);
-				this.deferred.fulfill(parsedResult);	
-			} else {
-				this.deferred.fulfill(result);
-			}
+class RequestCall extends AmazonMwsParentRequest {
+	constructor(CallName, Params) {
+		super({
+			Version          : "2009-01-01",
+			SellerOrMerchant : "Merchant",
+			Path             : "/",
+			Parser           : require('./parser'),
+			SubSchemas       : require('./subschemas.js'),
+			MainSchema       : require('./schema.js'),
+			CallName         : CallName,
+			Params           : Params
 		});
+		return this.ExecuteRequest();
 	}
 }
+
 
 class ReportsRequest  {
 	RequestReport					(params) { return new RequestCall('RequestReport', 						params); }

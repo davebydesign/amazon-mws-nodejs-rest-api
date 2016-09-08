@@ -6,129 +6,117 @@ var
 	tls       = require('tls'),
 	qs        = require("querystring"),
 	xml2js    = require('xml2js'),
-	Schemas   = require('./schemas'),
 	Validator = require('jsonschema').Validator;
 
 
 
-module.exports = class AmazonMwsRequest {
-	constructor() {
-		this.deferred    = MyPromise.pending();
-		this.query       = {};
-		this.httpVerb    = "POST";
-		this.host        = "mws.amazonservices.com";
-		this.port        = 443;
-		this.appName     = "Node_MWS_Client";
-		this.appVersion  = "0.1.0";
-		this.appLanguage = "Javascript / NodeJS";
-		this.contentType = "application/x-www-form-urlencoded; charset=utf-8";
-		this.resetQuery();
-	}
-
-	resetQuery() {
-
-		 if (this.query.Version) {
-		 	this.Version = this.query.Version;
-		 }
-
-		 if (this.query.SellerId) {
-		 	this.SellerId = process.env.MWS_MerchantId;
-		 	this.Merchant = null;		 	
-		 }
-
-		 if (this.query.Merchant) {
-		 	this.Merchant = process.env.MWS_MerchantId;
-		 	this.SellerId = null;		 	
-		 }
-
-
-		this.query = {
-			AWSAccessKeyId   : process.env.MWS_AccessKeyId,
+module.exports = class AmazonMwsParentRequest {
+	constructor(ChildData) {		
+		this.httpVerb       = "POST";
+		this.host           = "mws.amazonservices.com";
+		this.port           = 443;
+		this.appName        = "Node_MWS_Client";
+		this.appVersion     = "0.1.0";
+		this.appLanguage    = "Javascript / NodeJS";
+		this.contentType    = "application/x-www-form-urlencoded; charset=utf-8";
+		this.httpBody       = "";
+		this.paramsError    = "";
+		this.queryString    = "";
+		this.queryStringSig = "";
+		this.upload         = false;
+		this.headers        = {};
+		this.responseError  = {};
+		this.path           = ChildData.Path;
+		this.parser         = ChildData.Parser;
+		this.subSchemas     = ChildData.SubSchemas;
+		this.mainSchema     = ChildData.MainSchema;
+		this.callName       = ChildData.CallName;
+		this.params         = ChildData.Params;	
+		this.schemaValidator = new Validator();		
+		this.query          = {
+			AWSAccessKeyId  : process.env.MWS_AccessKeyId,
 			SecretAccessKey  : process.env.MWS_SecretAccessKey,
 			MarketplaceId    : process.env.MWS_MarketplaceId,
 			SignatureMethod  : "HmacSHA256",
 			SignatureVersion : 2,
 			Timestamp        : new Date().toISOString(),
-			Version : this.version
+			Version          : ChildData.Version
 		};
-		//if (this.sellerOrMerchant == "Seller") this.query["SellerId"] = this.creds.MerchantId;
-		//if (this.sellerOrMerchant == "Merchant") this.query["Merchant"] = this.creds.MerchantId;
+
+		if (ChildData.SellerOrMerchant === "Seller")   this.query.SellerId = process.env.MWS_MerchantId;
+		if (ChildData.SellerOrMerchant === "Merchant") this.query.Merchant = process.env.MWS_MerchantId;
+
 		
-		this.queryVersion = this.Version;
+		this.subSchemas.forEach((schema)=>{ this.schemaValidator.addSchema(schema, schema.id); });
 
-		if (this.SellerId) {
-			this.querySellerId = this.SellerId;
-		}
-
-		if (this.Merchant) {
-			this.queryMerchant = this.Merchant;
-		}
-
-		this.httpBody       = "";
-		this.paramsError    = "";
-		//this.responseError  = {};
-		this.queryString    = "";
-		this.queryStringSig = "";
-		this.upload         = false;
-		this.headers        = {};
-		this.loadSchema();	
 	}
 
-	loadSchema() {
-		this.schemaValidator = new Validator();
-		Schemas.forEach((schema)=>{ this.schemaValidator.addSchema(schema, schema.id); });
+
+
+
+	ExecuteRequest() {
+		this.deferred = MyPromise.pending();
+		if (!this.validate()) this.deferred.reject(this.validationErrors);
+
+		this.buildQuery();
+		this.createQueryString();
+		this.signQueryString();
+		this.setHeaders();	
+		this.submitRequest( (result) => {
+			if (this.detectResponseError(result)) {
+				return this.deferred.reject(this.responseError);
+			}
+			if (this.parser[this.callName]) {
+				this.deferred.fulfill( this.parser[this.callName](result) );	
+			} else {
+				this.deferred.fulfill(result);
+			}
+		});
+
+		return this.deferred.promise;
 	}
 
-	buildQuery(params) {
-		
-		this.query.Action = this.requestSchema.title;
-		this.throttling = this.requestSchema.throttling;
 
-		if (this.requestSchema.title === "GetServiceStatus") return;
+
+
+	validate() {
+		var validation = this.schemaValidator.validate(this.params, this.mainSchema);
+		this.validationErrors = validation.errors;
+		return (this.validationErrors.length === 0);		
+	}
+
+
+	buildQuery() {
+		
+		this.query.Action = this.mainSchema.title;
+		this.throttling = this.mainSchema.throttling;
+
+		if (this.mainSchema.title === "GetServiceStatus") return;
 		
 
-		for (var prop in this.requestSchema.properties) {
-			if (prop in params) {
-				switch(this.requestSchema.properties[prop].type) {
+		for (var key in this.mainSchema.properties) {
+			if (key in this.params) {
+				switch(this.requestSchema.properties[key].type) {
 					case 'number' :
+					case 'integer' :
 					case 'string' :
-						this.query[prop] = params[prop];
+						this.query[key] = this.params[key];
 						break;
 					case 'array' :
-						this.listify(this.requestSchema.properties[prop].name, params[prop]);
+						this.listify(this.requestSchema.properties[key].name, this.params[key]);
 						break;
 					case 'datetime':
-						this.query[prop] = new Date(params[prop]).toISOString();
+						this.query[key] = new Date(this.params[prop]).toISOString();
 						break;
 					case 'boolean':
-						setBooleanParam(prop, params);
+						setBooleanParam(key, this.params);
 						break;
 				}
 			}
 		}
 	}
 
-	validate(params) {
-		var validation = this.schemaValidator.validate(params, this.requestSchema);
-		this.validationErrors = validation.errors;
-		return (this.validationErrors.length === 0);		
-	}
 
-
-
-	log(){
-		console.log("super:"+JSON.stringify(this, null, 3));	
-	}
-
-/*
-	setThrottling(throttling) {
-		this.throttling = {
-			Name               : Name,
-			MaxRequestQuota    : MaxRequestQuota,
-			HourlyRestoreRate  : HourlyRestoreRate
-		};
-	}
-*/
 	listify(name, value) {
 		var i = 0;
 		if ((typeof(value) == "string") || (typeof(value) == "number")) {
@@ -147,6 +135,31 @@ module.exports = class AmazonMwsRequest {
 		}
 	}
 
+
+	setBooleanParam(key, params) {
+		var booltext = (params[key]) ? 'true' : 'false';	
+		this.query[key] = booltext;
+	}
+
+
+
+
+
+	log(){
+		console.log("super:"+JSON.stringify(this, null, 3));	
+	}
+
+/*
+	setThrottling(throttling) {
+		this.throttling = {
+			Name               : Name,
+			MaxRequestQuota    : MaxRequestQuota,
+			HourlyRestoreRate  : HourlyRestoreRate
+		};
+	}
+*/
+
+
 	mapComplexList(itemsArray) {
 		for (var ItemString of itemsArray) {
 			var 
@@ -159,40 +172,16 @@ module.exports = class AmazonMwsRequest {
 		}
 	}
 
-	
-	missingParams(paramsObj, requiredKeys) {
-		this.paramsError = '';
-		requiredKeys.every(function(key) { 
-			if (!key in paramsObj) {
-				this.paramsError += ("'"+key+"'"+" parameter required. \r\n");
-			} 
-		});
-	}
 
-	setBooleanParam(key, params) {
-		var booltext = (params[key]) ? 'true' : 'false';	
-		//this.query[""] = key, booltext);
-		this.query[key] = booltext;
-	}
+
+
 
 	detectResponseError(result) {
-		//console.log("Response Error");
 		this.responseError = _.get(result, 'ErrorResponse.Error', null);
-		if (this.responseError) return (this.responseError);
-
-
-		return (this.responseError) ? this.responseError : null;
+		return (_.isEmpty(this.responseError)) ? null : this.responseError;
 	}
 
-	makeRequest(callback) {
-		this.createQueryString();
-		this.signQueryString();
-		this.setHeaders();
-		this.submitRequest(callback);
 
-		//console.log(this.queryStringSig); 
-		//callback(this.queryStringSig);
-	}
 
 	submitRequest(callback) {
 		var reqOptions = {
@@ -273,19 +262,7 @@ module.exports = class AmazonMwsRequest {
 	}
 
 
-	invoke(params, callback) {
-		if (!this.validate(params)) this.deferred.reject(this.validationErrors); 
 
-		this.buildQuery(params);
-
-		this.makeRequest(callback);
-
-		//console.log(JSON.stringify(this.query, null, 3));
-
-		this.resetQuery();
-
-		return this.deferred.promise;		
-	}
 
 };
 

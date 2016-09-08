@@ -1,57 +1,36 @@
-var 
-	AmazonMwsRequest = require('../base_request'),
-	Parser = require('./parser'),
-	Schema = require('./schema.js');
-
-class FeedsRequestCall extends AmazonMwsRequest {
-	constructor(CallName, params) {
-		super();
-		this.query.Version  = "2009-01-01";
-		this.query.SellerId = process.env.MWS_MerchantId;
-		this.path           = "/";
+var AmazonMwsParentRequest = require('../parent-request-class');
 
 
-		if (CallName==='SubmitFeed') {
-			this.upload = true;
-			this.httpBody = params.FeedContent;			
-		}
-
-		if (CallName==='GetFeedSubmissionCount') {
-			if ('FeedTypeList' in params)				this.listify('FeedTypeList.Type', params.FeedTypeList);
-			if ('FeedProcessingStatusList' in params)	this.listify('FeedProcessingStatusList.Status', params.FeedProcessingStatusList);
-		}
-
-		if (CallName==='CancelFeedSubmissions') {
-			if ('FeedSubmissionIdList' in params)	this.listify('FeedSubmissionIdList.Id', params.FeedSubmissionIdList);
-			if ('FeedTypeListt' in params)			this.listify('FeedTypeList.Type', params.FeedTypeList);
-		}
-
-		return this.MakeCall(CallName, params);
-	}
-
-	MakeCall(CallName, params) {
-		this.requestSchema = Schema[CallName];
-		return this.invoke(params, (result)=>{
-			if (this.detectResponseError(result)) return this.deferred.reject(this.responseError);
-
-			if (Parser[CallName]) {
-				let parsedResult = Parser[CallName](result);
-				this.deferred.fulfill(parsedResult);	
-			} else {
-				this.deferred.fulfill(result);
-			}
+class RequestCall extends AmazonMwsParentRequest {
+	constructor(CallName, Params) {
+		super({
+			Version          : "2009-01-01",
+			SellerOrMerchant : "Seller",
+			Path             : "/",
+			Parser           : require('./parser'),
+			SubSchemas       : require('./subschemas.js'),
+			MainSchema       : require('./schema.js'),
+			CallName         : CallName,
+			Params           : Params
 		});
+
+		if (CallName ==='SubmitFeed') {
+			this.upload = true;
+			this.httpBody = Params.FeedContent;			
+		}
+
+		return this.ExecuteRequest();
 	}
 }
 
 
 class FeedsRequest  {
-	SubmitFeed						(params) { return new FeedsRequestCall('SubmitFeed', 						params); }
-	GetFeedSubmissionList			(params) { return new FeedsRequestCall('GetFeedSubmissionList', 			params); }
-	GetFeedSubmissionListByNextToken(params) { return new FeedsRequestCall('GetFeedSubmissionListByNextToken', 	params); }
-	GetFeedSubmissionCount			(params) { return new FeedsRequestCall('GetFeedSubmissionCount', 			params); }
-	CancelFeedSubmissions			(params) { return new FeedsRequestCall('CancelFeedSubmissions', 			params); }
-	GetFeedSubmissionResult			(params) { return new FeedsRequestCall('GetFeedSubmissionResult', 			params); }
+	SubmitFeed						(params) { return new RequestCall('SubmitFeed', 						params); }
+	GetFeedSubmissionList			(params) { return new RequestCall('GetFeedSubmissionList', 			params); }
+	GetFeedSubmissionListByNextToken(params) { return new RequestCall('GetFeedSubmissionListByNextToken', 	params); }
+	GetFeedSubmissionCount			(params) { return new RequestCall('GetFeedSubmissionCount', 			params); }
+	CancelFeedSubmissions			(params) { return new RequestCall('CancelFeedSubmissions', 			params); }
+	GetFeedSubmissionResult			(params) { return new RequestCall('GetFeedSubmissionResult', 			params); }
 }
 
 module.exports = new FeedsRequest();
