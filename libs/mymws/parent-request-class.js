@@ -31,10 +31,11 @@ module.exports = class AmazonMwsParentRequest {
 		this.subSchemas     = ChildData.SubSchemas;
 		this.mainSchema     = ChildData.MainSchema;
 		this.callName       = ChildData.CallName;
+		this.methodSchema = this.mainSchema[this.callName];
 		this.params         = ChildData.Params;	
 		this.schemaValidator = new Validator();		
 		this.query          = {
-			AWSAccessKeyId  : process.env.MWS_AccessKeyId,
+			AWSAccessKeyId   : process.env.MWS_AccessKeyId,
 			SecretAccessKey  : process.env.MWS_SecretAccessKey,
 			MarketplaceId    : process.env.MWS_MarketplaceId,
 			SignatureMethod  : "HmacSHA256",
@@ -80,7 +81,7 @@ module.exports = class AmazonMwsParentRequest {
 
 
 	validate() {
-		var validation = this.schemaValidator.validate(this.params, this.mainSchema);
+		var validation = this.schemaValidator.validate(this.params, this.methodSchema);
 		this.validationErrors = validation.errors;
 		return (this.validationErrors.length === 0);		
 	}
@@ -88,22 +89,22 @@ module.exports = class AmazonMwsParentRequest {
 
 	buildQuery() {
 		
-		this.query.Action = this.mainSchema.title;
-		this.throttling = this.mainSchema.throttling;
+		this.query.Action = this.methodSchema.title;
+		this.throttling = this.methodSchema.throttling;
 
-		if (this.mainSchema.title === "GetServiceStatus") return;
+		if (this.methodSchema.title === "GetServiceStatus") return;
 		
 
-		for (var key in this.mainSchema.properties) {
+		for (var key in this.methodSchema.properties) {
 			if (key in this.params) {
-				switch(this.requestSchema.properties[key].type) {
+				switch(this.methodSchema.properties[key].type) {
 					case 'number' :
 					case 'integer' :
 					case 'string' :
 						this.query[key] = this.params[key];
 						break;
 					case 'array' :
-						this.listify(this.requestSchema.properties[key].name, this.params[key]);
+						this.listify(this.methodSchema.properties[key].name, this.params[key]);
 						break;
 					case 'datetime':
 						this.query[key] = new Date(this.params[prop]).toISOString();
@@ -114,6 +115,7 @@ module.exports = class AmazonMwsParentRequest {
 				}
 			}
 		}
+	
 	}
 
 
@@ -239,6 +241,8 @@ module.exports = class AmazonMwsParentRequest {
 		this.queryString = this.queryString.replace(/\*/g,"%2A");
 		this.queryString = this.queryString.replace(/\(/g,"%28");
 		this.queryString = this.queryString.replace(/\)/g,"%29");
+
+		console.log(this.queryString);
 	}
 
 	signQueryString() {

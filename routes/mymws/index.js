@@ -22,4 +22,4 @@ router.use('/recommendations', 		require('./recommendations.js'));
 router.use('/reports', 				require('./reports.js'));
 router.use('/sellers', 				require('./sellers.js'));
 router.use('/subscriptions', 		require('./subscriptions.js'));
-router.use('/webstore', 			require('./webstore.js'));
+

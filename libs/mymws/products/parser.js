@@ -219,6 +219,11 @@ class ParserClass {
 		return Results.map(this.GetProductCategoriesParseResults);
 	}
 
+
+
+
+	
+
 	GetProductCategoriesParseResults(Result) {
 		let 
 		FullCategoryName = Result.ProductCategoryName,

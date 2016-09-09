@@ -15,15 +15,6 @@ class MyMWSClass {
 		this.Subscriptions        = require('./subscriptions');
 	}
 
-
-	parseParams(keys, reqbody) {
-		var params = {};
-		for (var key of keys) {
-			params[key] = (key in reqbody) ? reqbody[key] : null;
-		}
-
-		return	_.omit(params, _.isNull);	
-	}
 }
 
 
