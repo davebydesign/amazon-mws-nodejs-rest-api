@@ -17,6 +17,13 @@ The following MWS APIs are implemented (though not all are in complete working o
   * Sellers
   * Subscriptions
 
+The following MWS APIs have been deprecated (no longer included in Amazon's docs) and are not included:
+  * Cart Info
+  * Customer Info
+  * Web Store
+
+Also, the newly created Off-Amazon Payments API has not been included in this project.
+
 ## Usage
 (from within NodeJS)
 ```javascript
@@ -62,6 +69,9 @@ $.ajax(settings)
 ```
 
 ## Features
+  * API routes accept "multipart/form-data" or "application/x-www-form-urlencoded".
+  * All input data is validated against JSON Schema files using https://www.npmjs.com/package/jsonschema. (Alhough many JSON schema files are incomplete at the moment).
+
 
 ## Setup
 
